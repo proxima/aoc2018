@@ -4,21 +4,10 @@ def part_one
   num_two = num_three = 0
 
   file.each_line do |l|
-    l += '\n'
+    groups = l.each_char.group_by { |c| c }
 
-    l.each_char.reduce({} of Char => Int32) do |memo, ch|
-      next if memo.nil?
-
-      if ch == '\n'
-        num_two += 1 if memo.values.includes? 2
-        num_three += 1 if memo.values.includes? 3
-        next
-      end
-
-      memo[ch] ||= 0
-      memo[ch] += 1
-      memo
-    end
+    num_two   += 1 if groups.find { |k,v| v.size == 2 }
+    num_three += 1 if groups.find { |k,v| v.size == 3 }
   end
 
   num_two * num_three
