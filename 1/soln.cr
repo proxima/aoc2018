@@ -8,17 +8,16 @@ end
 def part_two
   file = File.open "input.txt", "r"
 
-  memo = { Set(Int32).new, 0 }
+  sum = 0
+  seen = Set(Int32).new
 
-  loop do
-    memo = file.each_line.map { |x| x.to_i }.reduce(memo) do |memo, x|
-      memo = { memo[0], memo[1] + x }
-      return memo[1] if memo[0].includes? memo[1]
-      memo[0].add memo[1]
-      memo
-    end
-    file.seek 0, IO::Seek::Set
+  file.each_line.to_a.map { |x| x.to_i }.cycle do |delta|
+    sum += delta
+    break sum if seen.includes? sum
+    seen.add sum
   end
+
+  sum
 end
 
 p part_one
