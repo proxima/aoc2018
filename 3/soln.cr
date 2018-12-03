@@ -3,7 +3,7 @@ require "set"
 def solution
   file = File.open "input.txt", "r"
   
-  locations = {} of Tuple(Int32, Int32) => Array(Int32)
+  locations = {} of Tuple(Int32,Int32) => Array(Int32)
   overlaps  = {} of Int32 => Set(Int32)
   
   file.each_line do |l|
@@ -16,7 +16,7 @@ def solution
 
       (x...x+w).each do |row|
         (y...y+h).each do |col|
-          if !locations.includes?({row, col})
+          if !locations.has_key?({row, col})
             locations[{row, col}] = [] of Int32
           else
             locations[{row, col}].each do |c|

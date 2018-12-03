@@ -15,7 +15,7 @@ def solution
 
     (x...x+w).each do |row|
       (y...y+h).each do |col|
-        if !locations.include?([row, col])
+        if !locations.has_key?([row, col])
           locations[[row, col]] = []
         else
           locations[[row, col]].each do |c|
