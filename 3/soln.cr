@@ -9,8 +9,6 @@ def solution
   file.each_line do |l|
     match = l.match /#(\d+) @ (\d+),(\d+): (\d+)x(\d+)/
 
-    p match
-
     match.try do |m|
       claim, x, y, w, h = m[1].to_i, m[2].to_i, m[3].to_i, m[4].to_i, m[5].to_i
 
